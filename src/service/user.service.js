@@ -26,5 +26,18 @@ class UserService{
          return res ? res.dataValues : null
         
     }
+    //更新字段 可以通用
+    async updateById({id,user_name,password,is_admin}){
+       const whereOpt={id}
+       const newUser={}
+       password && Object.assign(newUser,{password})
+       is_admin && Object.assign(newUser,{is_admin})
+       user_name && Object.assign(newUser,{user_name})
+       //生成新的对象newUser  ???
+       //User.update(newUser newUser里面属性是需要更新的参数
+       const res=await User.update(newUser,{where:whereOpt})
+       console.log(res)//返回一个[1] 为 true  or 0为false
+       return res[0]>0 ? true:false
+      }
 }
 module.exports=new UserService()
