@@ -9,7 +9,7 @@ class UserService{
        
        
     }
-      
+      // async 返回的都是对象，任何对象在if(),是 trues
     async getUerInfo({id,user_name,password,is_admin}){
          const whereOpt={}
          //id存在 就拷贝到whereOpt
@@ -22,7 +22,9 @@ class UserService{
              attributes:['id','user_name','password','is_admin'],
              where:whereOpt
          })
+         console.log("res是:"+res)
          return res ? res.dataValues : null
+        
     }
 }
 module.exports=new UserService()

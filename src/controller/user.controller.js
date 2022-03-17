@@ -1,7 +1,9 @@
 const {createUser,getUerInfo}=require('../service/user.service')
+const {userRegisterError}=require('../constant/err.type')
 class UserController{
     async register(ctx,next){
-      
+        const {user_name,password}=ctx.request.body
+      try{
         const res=await createUser(user_name,password)
         ctx.body={
             code:0,
@@ -14,6 +16,11 @@ class UserController{
             }
 
         }
+    }catch(err){
+        console.log(err)
+        ctx.app.emit('error',userRegisterError,ctx)
+        
+    }
         
 
         
