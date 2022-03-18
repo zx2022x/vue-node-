@@ -4,9 +4,9 @@ class UserService{
     //用户注册,插入数据user_name,password
     async createUser(user_name,password){
         //插入用户
-      const res= await User.create({user_name,password})
-       return res.dataValues
-       
+        const res= await User.create({user_name,password})
+        return res.dataValues
+        
        
     }
       // async 返回的都是对象，任何对象在if(),是 trues

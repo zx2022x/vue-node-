@@ -11,7 +11,12 @@ const {
     register,
     login,
     changePassword,
+    
  }=require('../controller/user.controller')
+ const {
+     GoodsController
+
+}=require('../controller/goods.controller')
 const router=new Router({ prefix:'/users' })
 // 注册接口
 //userValidator是中间件

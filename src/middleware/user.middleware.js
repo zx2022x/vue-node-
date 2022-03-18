@@ -37,7 +37,7 @@ const verifyUser = async (ctx, next) => {
         const res = await getUerInfo({ user_name })
 
         console.log(res);
-        //
+        //相同名字不能注册
         if (res) {
 
             console.error('用户名已经存在', { user_name })
@@ -77,8 +77,8 @@ const verifyLogin = async (ctx, next) => {
            
         }
 
-         //密码是否匹配,
-    if(bcrypt.compareSync(password,res.password)){
+         //密码是否匹配,bcrypt.compareSync返回的是true
+    if(!bcrypt.compareSync(password,res.password)){
         return ctx.app.emit('error',invalidPassword,ctx)
         
        

@@ -31,7 +31,7 @@ module.exports={
     //
     invalidPassword:{
         code:'10006',
-        message:'密码为空',
+        message:'密码错误',
         result:'',
     },
     tokenExpiredError:{
@@ -43,6 +43,24 @@ module.exports={
         code:'101',
         message:'无效的token',
         result:''
+    },
+    hasNotAdminPermission:{
+        code:'10103',        
+        message:'没有管理员权限',
+        result:'',
+    },
+    fileUploadError:{
+        code:'10201',
+        message:'商品图片',
+        result:'',
+
+    },
+    unSupportedFileType:{
+        code:'10202',
+        message:'不支持的文件格式',
+        result:'',
+
+
     }
 
 }

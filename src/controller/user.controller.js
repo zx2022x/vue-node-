@@ -34,6 +34,7 @@ class UserController{
 
         
     }
+    //用户登录
     async login(ctx,next){
         const {user_name}=ctx.request.body
         // ctx.body=`欢迎回来${user_name}`
