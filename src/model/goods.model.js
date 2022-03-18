@@ -37,6 +37,9 @@ const Goods = seq.define('goods', {
    
 
 
+},{
+    paranoid:true,//软删除
 })
-// User.sync({force:true}) 强制同步数据库 创建表格
+Goods.sync({force:true}) 
+// 强制同步数据库 创建表格
 module.exports=Goods

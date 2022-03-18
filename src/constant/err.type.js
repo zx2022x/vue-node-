@@ -74,6 +74,15 @@ module.exports={
         result:'',
 
 
+    },
+    invalidGoodsID:{
+
+        code:'10205',
+        message:'修改商品不存在',
+        result:'',
+
+    
     }
+    
 
 }

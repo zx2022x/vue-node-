@@ -4,7 +4,10 @@ const {
     hadAdminPermission,
 }=require('../middleware/auth.middleware')
 const {validator}=require('../middleware/goods.middleware')
-const {upload,create} =require('../controller/goods.controller')
+const {upload,
+    create,
+    update,
+    remove} =require('../controller/goods.controller')
 // const{validator}=require("sequelize/types/utils/validator-extras")
 
 const router=new Router({prefix:'/goods'})
@@ -15,5 +18,8 @@ const router=new Router({prefix:'/goods'})
 router.post('/upload',upload)
 //发布商品接口
 router.post('/', auth,hadAdminPermission,validator,create)
-
+//修改商品接口 put适合发送多个参数
+router.put('/:id',auth,hadAdminPermission,validator,update)
+//硬删除
+router.delete('/:id',auth,hadAdminPermission,remove)
 module.exports=router

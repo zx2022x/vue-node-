@@ -2,9 +2,10 @@ const path=require('path')
 
 const {fileUploadError,
        unSupportedFileType,
-       publishGoodsError
-      } =require('../constant/err.type')
-const {createGoods} =require('../service/goods.service')
+       publishGoodsError,
+       invalidGoodsID
+       } =require('../constant/err.type')
+const {createGoods,updateGoods,removeGoods} =require('../service/goods.service')
 class GoodsController{
     //可以上传任何文件
     async upload(ctx,next){
@@ -53,7 +54,42 @@ class GoodsController{
      
 
     }
-    
+    //更新商品
+    async update(ctx){
+        try {
+
+        const res= await updateGoods(ctx.params.id,ctx.request.body)
+           if(res){
+               ctx.body={
+                   code:0,
+                   message:'修改商品成功',
+                   result:''
+               }
+           }else{
+
+                return ctx.app.emit('error',invalidGoodsID,ctx)
+
+            
+            }
+                
+        
+        } catch (error) {
+             
+        }
+       
+
+    }
+    //直接删除商品记录
+    async remove(ctx){
+        await removeGoods(ctx.params.id)
+        ctx.body={
+            code:0,
+            message:'删除成功',
+            result:'',
+
+
+        }
+    }
 
 }
 module.exports=new GoodsController()

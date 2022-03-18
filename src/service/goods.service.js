@@ -5,5 +5,19 @@ class GoodsService{
      const res= await Goods.create(goods)
      return res.dataValues
     }
+    //更新商品
+    async updateGoods(id,goods){
+     
+            const res=await Goods.update(goods,{where:{id}})
+            //res[0]=0 or 1
+            return res[0]>0 ? true:false
+        
+            
+    }
+    //直接删除商品
+    async removeGoods(id){
+    const res= await  Goods.destroy({where:{id}})
+    return res[0]>0 ? true:false
+    }
 }
 module.exports=new GoodsService()
