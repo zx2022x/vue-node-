@@ -7,7 +7,8 @@ const {validator}=require('../middleware/goods.middleware')
 const {upload,
     create,
     update,
-    remove} =require('../controller/goods.controller')
+    remove,
+    remove_xj} =require('../controller/goods.controller')
 // const{validator}=require("sequelize/types/utils/validator-extras")
 
 const router=new Router({prefix:'/goods'})
@@ -22,4 +23,6 @@ router.post('/', auth,hadAdminPermission,validator,create)
 router.put('/:id',auth,hadAdminPermission,validator,update)
 //硬删除
 router.delete('/:id',auth,hadAdminPermission,remove)
+//商品下架
+router.post('/:id/off',auth,hadAdminPermission,remove_xj)
 module.exports=router

@@ -5,7 +5,11 @@ const {fileUploadError,
        publishGoodsError,
        invalidGoodsID
        } =require('../constant/err.type')
-const {createGoods,updateGoods,removeGoods} =require('../service/goods.service')
+const {
+    createGoods,
+    updateGoods,
+    removeGoods,
+    removeGoods_xj} =require('../service/goods.service')
 class GoodsController{
     //可以上传任何文件
     async upload(ctx,next){
@@ -85,6 +89,17 @@ class GoodsController{
         ctx.body={
             code:0,
             message:'删除成功',
+            result:'',
+
+
+        }
+    }
+    //商品下架
+    async remove_xj(ctx){
+        await removeGoods_xj(ctx.params.id)
+        ctx.body={
+            code:0,
+            message:'商品下架成功',
             result:'',
 
 
