@@ -1,6 +1,6 @@
 const {DataTypes}=require('sequelize')
 const seq=require('../db/seq')
-const User=seq.define('zd_user',{
+const User=seq.define('user',{
     // id会被sequelize自动创建
     user_name:{
         type:DataTypes.STRING,
