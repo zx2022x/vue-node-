@@ -14,10 +14,12 @@ app.use(KoaBody({
     multipart:true,//打开文件上传
     formidable:{
         uploadDir:path.join(__dirname,'../upload'),//__dirname,'../upload'当前文件绝对路径的上一层/upload
-        keepExtensions:true//是否保留文件扩展名
+        keepExtensions:true,//是否保留文件扩展名
         
-    }
-
+    },
+    // parsedMethods:['POST','PUT','PATCH','DELETE'],
+    parsedMethods: ['POST', 'PUT', 'PATCH', 'DELETE'],
+     
 
 }))//在所有路由注册之前
 //注册路由

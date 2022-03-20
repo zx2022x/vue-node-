@@ -137,9 +137,10 @@ class GoodsController {
         const { pageNum = 1, pageSize = 10 } = ctx.request.query
         const res = await findGoods(pageNum, pageSize)
         ctx.body={
+            
             code:0,
             message:'获取商品列表',
-            result:'res',
+            result:res,//把它写成字符串了，导致读不出数据
 
         }
 

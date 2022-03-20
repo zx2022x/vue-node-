@@ -1,5 +1,6 @@
 const {DataTypes}=require('sequelize')
 const seq=require('../db/seq')
+const Goods=require('./goods.model')
 const Cart=seq.define('carts',{
     goods_id:{
         type:DataTypes.INTEGER,
@@ -30,5 +31,10 @@ const Cart=seq.define('carts',{
     }
 
 })
+
+Cart.belongsTo(Goods,{
+     foreignKey:'goods_id',
+     as:'goods_info',
+})//外键goods_id在Cart表里面
 // Cart.sync({force:true}) 
 module.exports=Cart

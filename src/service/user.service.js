@@ -39,5 +39,6 @@ class UserService{
        console.log(res)//返回一个[1] 为 true  or 0为false
        return res[0]>0 ? true:false
       }
+    
 }
 module.exports=new UserService()
