@@ -3,8 +3,8 @@ const {addrFormatError}=require('../constant/err.type')
 const validator=(rules)=>{
     return async(ctx,next)=>{
         try {
-         
-          await ctx.verifyParams(rules)
+        
+        return  ctx.verifyParams(rules)
          
         } catch (error) {
            console.error(error)
@@ -12,7 +12,7 @@ const validator=(rules)=>{
           
            return ctx.app.emit('error', addrFormatError,ctx)
         }
-       
+   
         await next()
     }
 }

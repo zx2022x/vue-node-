@@ -17,7 +17,7 @@ app.use(KoaBody({
         keepExtensions:true,//是否保留文件扩展名
         
     },
-    // parsedMethods:['POST','PUT','PATCH','DELETE'],
+   
     parsedMethods: ['POST', 'PUT', 'PATCH', 'DELETE'],
      
 
