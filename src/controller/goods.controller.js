@@ -11,7 +11,7 @@ const {
     removeGoods,
     removeGoods_xj,
     restoreGoods,
-    findAll } = require('../service/goods.service')
+    findGoods } = require('../service/goods.service')
 class GoodsController {
     //可以上传任何文件
     async upload(ctx, next) {
@@ -115,34 +115,49 @@ class GoodsController {
     }
     //上架商品
     async restore(ctx) {
-        const res = await restoreGoods(ctx.params.id)
-        if (res) {
+        try {
 
-            ctx.body = {
-                code: 0,
-                message: '商品上架成功',
-                result: '',
-
-
+            const res = await restoreGoods(ctx.params.id)
+            if (res) {
+    
+                ctx.body = {
+                    code: 0,
+                    message: '商品上架成功',
+                    result: '',
+    
+    
+                }
+            } else {
+                console.log("没有")
+                return ctx.app.emit('error', invalidGoodsID, ctx)
             }
-        } else {
-            console.log("没有")
-            return ctx.app.emit('error', invalidGoodsID, ctx)
+            
+        } catch (error) {
+            console.log('商品发布'+error)
         }
+      
 
     }
     //商品列表
     async findAll(ctx) {
-        //默认值pageNum=1,pageSize=10
-        const { pageNum = 1, pageSize = 10 } = ctx.request.query
-        const res = await findGoods(pageNum, pageSize)
-        ctx.body={
-            
-            code:0,
-            message:'获取商品列表',
-            result:res,//把它写成字符串了，导致读不出数据
+        try {
 
+            const { pageNum = 1, pageSize = 10 } = ctx.request.query
+            const res = await findGoods(pageNum, pageSize)
+            ctx.body = {
+
+                code: 0,
+                message: '获取商品列表',
+                result: res,//把它写成字符串了，导致读不出数据
+
+            }
+
+
+        } catch (error) {
+               console.log('商品信息'+error)
         }
+        //默认值pageNum=1,pageSize=10
+
 
     }
 

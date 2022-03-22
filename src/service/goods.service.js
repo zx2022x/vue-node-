@@ -32,19 +32,26 @@ class GoodsService {
                 return res > 0 ? true : false
 
         }
-        //商品列表pagesNum页码,pageSize每页显示多少条
-        async findGoods(pagesNum, pageSize) {
+        //商品列表pageNum页码,pageSize每页显示多少条
+        async findGoods(pageNum, pageSize) {
                 //获取总数
                 // const count = await Goods.count()
-                // const offset = (pagesNum - 1) * pageSize //偏移量
+                // const offset = (pageNum - 1) * pageSize //偏移量
                 // const rows = await Goods.findAll({ offset: offset, limit: pageSize*1 })//商品信息
-                const offset = (pagesNum - 1) * pageSize 
-                const {count,rows}=await findAndCountAll({ offset: offset, limit: pageSize*1 })
-                return{
-                        pageNum,
-                        pageSize,
-                        total:count,
-                        list:rows
+                try {
+
+                        const offset = (pageNum - 1) * pageSize
+                        const { count, rows } = await Goods.findAndCountAll({ offset: offset, limit: pageSize * 1 })
+                        return {
+                                pageNum,
+                                pageSize,
+                                total: count,
+                                list: rows
+                        }
+
+
+                } catch (error) {
+
                 }
 
         }

@@ -5,12 +5,13 @@ const{
     cryptPassword,
     verifyLogin,
               }=require('../middleware/user.middleware')
-const{auth}=require('../middleware/auth.middleware')
+const{auth,hadAdminPermission}=require('../middleware/auth.middleware')
 
 const {
     register,
     login,
     changePassword,
+    search
     
  }=require('../controller/user.controller')
  const {
@@ -25,6 +26,7 @@ router.post('/register',userValidator,verifyUser,cryptPassword,register)
 router.post('/login',userValidator,verifyLogin,login)
 //修改密码 patch请求允许只改一个参数
 router.patch('/',auth,cryptPassword,changePassword)
-
+//获取用户列表
+router.get('/',auth,hadAdminPermission,search)
 
 module.exports=router
