@@ -1,6 +1,14 @@
 const path =require('path')
 
 const Koa=require('koa');
+
+  
+
+
+
+
+
+
 const KoaBody=require('koa-body')
 const KoaStatic =require('koa-static')//处理静态文件
 const parameter=require('koa-parameter')//参数校验
@@ -10,6 +18,25 @@ const parameter=require('koa-parameter')//参数校验
 const router=require('../router')
 const errHandler=require('../app/errHandler')
 const app=new Koa()
+const cors = require('koa2-cors');
+app.use(cors({
+    origin: function (ctx) {
+        if (ctx.url === '/test') {
+            return "*"; // 允许来自所有域名请求
+        }
+        // return 'http://localhost:8080'; //这样就能只允许 http://localhost:8080 这个域名的请求了
+    },
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    maxAge: 5,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}))
+
+
+
+
+
 app.use(KoaBody({
     multipart:true,//打开文件上传
     formidable:{

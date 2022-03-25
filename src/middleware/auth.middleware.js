@@ -8,6 +8,7 @@ const auth = async (ctx, next) => {
         const { authorization='' } = ctx.request.header
         //拿到token值
         const token = authorization.replace('Bearer ', '')
+        
         //验证token
         //user中包含了payload的信息（id,user_name,is_admin)
         //user存到了state

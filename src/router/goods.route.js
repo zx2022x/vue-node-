@@ -21,6 +21,7 @@ const router=new Router({prefix:'/goods'})
 router.post('/upload',upload)
 //发布商品接口
 router.post('/', auth,hadAdminPermission,validator,create)
+// router.post('/', validator,create)
 //修改商品接口 put适合发送多个参数
 router.put('/:id',auth,hadAdminPermission,validator,update)
 //硬删除
