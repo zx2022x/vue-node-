@@ -4,7 +4,7 @@ const validator=(rules)=>{
     return async(ctx,next)=>{
         try {
         
-        return  ctx.verifyParams(rules)
+          ctx.verifyParams(rules)
          
         } catch (error) {
            console.error(error)

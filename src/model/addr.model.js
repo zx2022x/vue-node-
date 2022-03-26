@@ -35,5 +35,5 @@ const Address = seq.define('addresses', {
 
 
 )
-// Address.sync({force:true}) 11
+// Address.sync({force:true})
 module.exports = Address

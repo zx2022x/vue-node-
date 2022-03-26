@@ -18,7 +18,8 @@ class AddrController {
                 result: res
             }
         } catch (error) {
-            console.log('地址控制区' + res)
+            console.log('地址控制区')
+            console.log(error)
         }
 
     }
