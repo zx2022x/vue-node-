@@ -64,6 +64,19 @@ const cryptPassword = async (ctx, next) => {
     ctx.request.body.password = hash
     await next()
 }
+//加密 管理员修改用户的密码
+// const cryptMaPassword = async (ctx, next) => {
+//     const { password } = ctx.request.body
+//     var salt = bcrypt.genSaltSync(10);
+//     //传递明文密码,hash保存的是密文
+//     var hash = bcrypt.hashSync(password, salt);
+//     //把hash覆盖原来的密码
+//     ctx.request.body.password = hash
+//     await next()
+// }
+
+
+
 const verifyLogin = async (ctx, next) => {
     //1.判断用户是否存在(不存在：报错)
    

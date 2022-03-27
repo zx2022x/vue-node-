@@ -60,7 +60,7 @@ class UserController {
 
 
     }
-    //更改密码
+    //用户自己更改密码
     async changePassword(ctx, next) {
         //1获取数据库
         const id = ctx.state.user.id
@@ -83,6 +83,30 @@ class UserController {
         }
 
     }
+   //管理员修改用户密码
+   async changePassword(ctx, next) {
+    //1获取数据库
+     const id = ctx.request.body.id
+     const password = ctx.request.body.password
+    if (await updateById({ id, password })) {
+        ctx.body = {
+            code: 0,
+            message: '修改密码成功',
+            result: '',
+
+
+        }
+    } else {
+        ctx.body = {
+            code: '10007',
+            message: '修改密码失败',
+            result: '',
+
+        }
+    }
+
+}
+
     //获取用户列表
 
     async search(ctx) {
