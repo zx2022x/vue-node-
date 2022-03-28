@@ -1,4 +1,5 @@
 const Goods = require('../model/goods.model')
+const { Op } = require("sequelize");
 class GoodsService {
         //插入商品的信息 goods是ctx.request.body create是插入方法
         async createGoods(goods) {
@@ -41,7 +42,14 @@ class GoodsService {
                 try {
 
                         const offset = (pageNum - 1) * pageSize
-                        const { count, rows } = await Goods.findAndCountAll({ offset: offset, limit: pageSize * 1 })
+                        const { count, rows } = await Goods.findAndCountAll(
+                                {
+
+                                        offset: offset,
+                                        limit: pageSize * 1,
+                                        paranoid: false
+                                }
+                        )
                         return {
                                 pageNum,
                                 pageSize,
@@ -52,6 +60,44 @@ class GoodsService {
 
                 } catch (error) {
 
+                }
+
+        }
+
+        //软删除商品列表pageNum页码,pageSize每页显示多少条
+        async rufindGoods(pageNum, pageSize) {
+                //获取总数
+                // const count = await Goods.count()
+                // const offset = (pageNum - 1) * pageSize //偏移量
+                // const rows = await Goods.findAll({ offset: offset, limit: pageSize*1 })//商品信息
+                try {
+
+                        const offset = (pageNum - 1) * pageSize
+                        const { count, rows } = await Goods.findAndCountAll(
+                                { 
+                                        offset: offset, 
+                                        limit: pageSize * 1,
+                                        paranoid: false,
+                                        where:{
+                                               
+                                                
+                                                [Op.not]: [{ deletedAt:null}] //判断里面的条件不为真
+                                                
+                                                // [Op.not]: [{ [Op.is]: [{deletedAt:null}]}]
+                                        }
+
+                                })
+                        return {
+                                pageNum,
+                                pageSize,
+                                total: count,
+                                list: rows
+                        }
+
+
+                } catch (error) {
+                  console.log("error")
+                  console.log(error)
                 }
 
         }
