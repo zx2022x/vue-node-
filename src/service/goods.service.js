@@ -47,7 +47,7 @@ class GoodsService {
 
                                         offset: offset,
                                         limit: pageSize * 1,
-                                        paranoid: false
+                                       
                                 }
                         )
                         return {
