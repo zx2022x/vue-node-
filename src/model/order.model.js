@@ -1,5 +1,6 @@
 const seq = require('../db/seq')
 const { DataTypes } = require('sequelize')
+const Address = require("./addr.model")
 const Order = seq.define('orders', {
     user_id: {
         type: DataTypes.INTEGER,
@@ -32,11 +33,11 @@ const Order = seq.define('orders', {
         defaultValue: 0,
         comment: '订单状态(0: 未支付,1: 已支付, 2: 已发货, 3: 已签收, 4: 取消)',
     },
-
-
 }
-
-
 )
+// Order.belongsTo(Address, {
+//     sourceKey: 'id',
+//     foreignKey: "address_id"
+// })
 // Order.sync({ force: true })
 module.exports = Order

@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')//导入seq连接
 const seq = require('../db/seq')
+const Order = require("./order.model")
 const Address = seq.define('addresses', {
     user_id: {
         type: DataTypes.INTEGER,
@@ -32,8 +33,10 @@ const Address = seq.define('addresses', {
     }
 
 }
-
-
 )
+// Address.hasMany(Order, {
+//     sourceKey: 'id',
+//     foreignKey: "address_id"
+// })
 // Address.sync({force:true})
 module.exports = Address

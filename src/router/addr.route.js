@@ -2,6 +2,10 @@ const Router = require('koa-router')
 const router = new Router({ prefix: '/address' })
 const { auth } = require('../middleware/auth.middleware')
 const { validator } = require('../middleware/addr.middleware')
+const {getAddressWithOrder} = require("../service/addr.service")
+
+const Address = require("../model/addr.model")
+const Order = require("../model/order.model")
 const {
     create,
     findAll,
@@ -30,4 +34,25 @@ router.put('/:id',auth,validator({
 router.delete('/:id',auth,remove)
 //设置默认 patch是打补丁
 router.patch('/:id',auth,setDefault)
+
+router.get("/with_order", async ctx => {
+    console.log(666);
+    try {
+        Address.hasMany(Order, {
+            sourceKey: 'id',
+            foreignKey: "address_id"
+        })
+        Order.belongsTo(Address, {
+            sourceKey: 'id',
+            foreignKey: "address_id"
+        })
+        const res = await getAddressWithOrder({id: 1})
+        ctx.body = res
+    } catch (error) {
+        
+        console.log(error);
+    }
+
+
+})
 module.exports = router

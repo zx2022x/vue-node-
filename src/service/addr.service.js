@@ -1,4 +1,5 @@
 const Address = require('../model/addr.model')
+const Order = require("../model/order.model")
 class AddrService {
     //获取更新列表
     async createAddr(addr) {
@@ -22,7 +23,6 @@ class AddrService {
     async updateAddr(id, addr) {
 
         return await Address.update(addr, { where: { id } })
-
     }
     //删除地址列表
     async removeAddr(id) {
@@ -51,6 +51,21 @@ class AddrService {
         )
     }
 
+    async getAddressWithOrder ({id}) {
+        let res = null
+        console.log(777);
+        try {
+            res = await Address.findByPk(id, {
+                include: {
+                    model: Order
+                }
+            })
+        } catch (e) {
+            console.log(e);
+        }
+
+        return res
+    }
 
 }
 module.exports = new AddrService()
