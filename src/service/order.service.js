@@ -1,5 +1,5 @@
 const Order = require('../model/order.model')
-
+const Address=require('../model/addr.model')
 class OrderService {
   //创建订单
   async createOrder(order) {
@@ -12,12 +12,19 @@ class OrderService {
       const { count, rows } = await Order.findAndCountAll({
         
         attributes:['goods_info','total','order_number','status'],
+      
         where: {
           status
         },
         offset: (pageNum - 1) * pageSize,
-        limit: pageSize * 1//limit限制页面列表数量
-  
+        limit: pageSize * 1,//limit限制页面列表数量
+        include: {
+          model: Address,
+          
+          attributes: ['consignee', 'phone', 'address'],
+          where:{is_default:1}
+      },
+      
       })
 
       return {

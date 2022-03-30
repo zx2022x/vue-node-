@@ -2,7 +2,7 @@ const Router = require('koa-router')
 const router = new Router({ prefix: '/orders' })
 const { validator } = require('../middleware/order.middleware')
 const { auth } = require('../middleware/auth.middleware')
-const {create,findAll,update}=require('../controller/order.controller')
+const {create,findAll,update,}=require('../controller/order.controller')
 
 //提交订单
 router.post(
@@ -21,12 +21,6 @@ router.post(
 router.get('/',auth,findAll)
 
 //更新订单状态
-router.patch(
-    '/:id',
-     auth,
-     validator({
-         status:'number',
-
-     }),
+router.patch('/:id',auth,validator({status:'number',}),
      update)
 module.exports = router

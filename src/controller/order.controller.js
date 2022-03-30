@@ -1,4 +1,7 @@
+const { userDoesNotExist } = require('../constant/err.type')
 const { createOrder, findAllOrder, updateOrder } = require('../service/order.service')
+const  Address =require("../model/addr.model")
+const  Order=require("../model/order.model")
 class OrderController {
     //提交订单
     async create(ctx) {
@@ -32,6 +35,15 @@ class OrderController {
     ////获取订单列表
     async findAll(ctx) {
         try {
+            
+            Address.hasMany(Order, {
+                sourceKey: 'user_id',
+                foreignKey: "user_id"
+            })
+            Order.belongsTo(Address, {
+                sourceKey: 'user_id',
+                foreignKey: "user_id"
+            })
 
             const { pageNum = 1, pageSize = 10, status = 0 } = ctx.request.query
             const res = await findAllOrder(pageNum, pageSize, status)
@@ -63,5 +75,17 @@ class OrderController {
 
 
     }
+    //两个表连接
+//   async connect(){
+//         Address.hasMany(Order, {
+//             sourceKey: 'id',
+//             foreignKey: "address_id"
+//         })
+//         Order.belongsTo(Address, {
+//             sourceKey: 'id',
+//             foreignKey: "address_id"
+//         })
+//         next()
+//     }
 }
 module.exports = new OrderController()
