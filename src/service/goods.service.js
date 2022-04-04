@@ -64,6 +64,74 @@ class GoodsService {
 
         }
 
+         //商品列表(已经分类)pageNum页码,pageSize每页显示多少条
+         async findFenGoods(pageNum, pageSize,goods_fm) {
+                //获取总数
+                // const count = await Goods.count()
+                // const offset = (pageNum - 1) * pageSize //偏移量
+                // const rows = await Goods.findAll({ offset: offset, limit: pageSize*1 })//商品信息
+                try {
+
+                        const offset = (pageNum - 1) * pageSize
+                        const { count, rows } = await Goods.findAndCountAll(
+                                {
+
+                                        offset: offset,
+                                        limit: pageSize * 1,
+                                        where:{goods_fm}//直接把条件goods_fm 放在这里
+                                }
+                        )
+                        return {
+                                pageNum,
+                                pageSize,
+                                total: count,
+                                list: rows
+                        }
+
+
+                } catch (error) {
+
+                }
+
+        }
+       
+        
+        //获取水果商品列表
+        async findGoods(pageNum, pageSize) {
+                //获取总数
+                // const count = await Goods.count()
+                // const offset = (pageNum - 1) * pageSize //偏移量
+                // const rows = await Goods.findAll({ offset: offset, limit: pageSize*1 })//商品信息
+                try {
+
+                        const offset = (pageNum - 1) * pageSize
+                        const { count, rows } = await Goods.findAndCountAll(
+                                {
+
+                                        offset: offset,
+                                        limit: pageSize * 1,
+                                        
+                                }
+                        )
+                        return {
+                                pageNum,
+                                pageSize,
+                                total: count,
+                                list: rows
+                        }
+
+
+                } catch (error) {
+
+                }
+
+        }
+       
+
+
+
+
+
         //软删除商品列表pageNum页码,pageSize每页显示多少条
         async rufindGoods(pageNum, pageSize) {
                 //获取总数

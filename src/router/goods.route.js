@@ -11,7 +11,8 @@ const {upload,
     remove_xj,
     restore,
     findAll,
-    rufindAll} =require('../controller/goods.controller')
+    rufindAll,
+    findFenAll} =require('../controller/goods.controller')
 // const{validator}=require("sequelize/types/utils/validator-extras")
 
 const router=new Router({prefix:'/goods'})
@@ -33,6 +34,11 @@ router.post('/:id/off',auth,hadAdminPermission,remove_xj)
 router.post('/:id/on',auth,hadAdminPermission,restore)
 //获取商品列表
 router.get('/',findAll)
+//获取分类过后的商品列表
+router.get('/item',findFenAll)
+
+
+
 //获取软删除商品列表(已下架)
 router.get('/ru',rufindAll)
 module.exports=router
