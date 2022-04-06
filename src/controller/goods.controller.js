@@ -13,7 +13,8 @@ const {
     restoreGoods,
     findGoods,
     rufindGoods,
-    findFenGoods } = require('../service/goods.service')
+    findFenGoods,
+    searchGoods } = require('../service/goods.service')
 class GoodsController {
     //可以上传任何文件
     async upload(ctx, next) {
@@ -208,7 +209,28 @@ class GoodsController {
 
 
     }
+    //搜索商品
+   async SearchItem(ctx){
 
+    try {
+
+        const { pageNum = 1, pageSize = 10, goods_name} = ctx.request.query
+        const res = await searchGoods(pageNum, pageSize,goods_name)
+        ctx.body = {
+
+            code: 0,
+            message: '获取商品列表',
+            result: res,//把它写成字符串了，导致读不出数据
+
+        }
+
+
+    } catch (error) {
+           console.log('商品信息'+error)
+    }
+    //默认值pageNum=1,pageSize=10
+
+    }
 
 }
 module.exports = new GoodsController()

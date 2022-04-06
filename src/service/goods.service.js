@@ -47,7 +47,7 @@ class GoodsService {
 
                                         offset: offset,
                                         limit: pageSize * 1,
-                                       
+
                                 }
                         )
                         return {
@@ -64,8 +64,8 @@ class GoodsService {
 
         }
 
-         //商品列表(已经分类)pageNum页码,pageSize每页显示多少条
-         async findFenGoods(pageNum, pageSize,goods_fm) {
+        //商品列表(已经分类)pageNum页码,pageSize每页显示多少条
+        async findFenGoods(pageNum, pageSize, goods_fm) {
                 //获取总数
                 // const count = await Goods.count()
                 // const offset = (pageNum - 1) * pageSize //偏移量
@@ -78,7 +78,7 @@ class GoodsService {
 
                                         offset: offset,
                                         limit: pageSize * 1,
-                                        where:{goods_fm}//直接把条件goods_fm 放在这里
+                                        where: { goods_fm }//直接把条件goods_fm 放在这里
                                 }
                         )
                         return {
@@ -94,8 +94,8 @@ class GoodsService {
                 }
 
         }
-       
-        
+
+
         //获取水果商品列表
         async findGoods(pageNum, pageSize) {
                 //获取总数
@@ -110,7 +110,7 @@ class GoodsService {
 
                                         offset: offset,
                                         limit: pageSize * 1,
-                                        
+
                                 }
                         )
                         return {
@@ -126,7 +126,7 @@ class GoodsService {
                 }
 
         }
-       
+
 
 
 
@@ -142,15 +142,15 @@ class GoodsService {
 
                         const offset = (pageNum - 1) * pageSize
                         const { count, rows } = await Goods.findAndCountAll(
-                                { 
-                                        offset: offset, 
+                                {
+                                        offset: offset,
                                         limit: pageSize * 1,
                                         paranoid: false,
-                                        where:{
-                                               
-                                                
-                                                [Op.not]: [{ deletedAt:null}] //判断里面的条件不为真
-                                                
+                                        where: {
+
+
+                                                [Op.not]: [{ deletedAt: null }] //判断里面的条件不为真
+
                                                 // [Op.not]: [{ [Op.is]: [{deletedAt:null}]}]
                                         }
 
@@ -164,11 +164,52 @@ class GoodsService {
 
 
                 } catch (error) {
-                  console.log("error")
-                  console.log(error)
+                        console.log("error")
+                        console.log(error)
                 }
 
         }
+        //搜索商品
+        async searchGoods(pageNum, pageSize, goods_name) {
+                //获取总数
+                // const count = await Goods.count()
+                // const offset = (pageNum - 1) * pageSize //偏移量
+                // const rows = await Goods.findAll({ offset: offset, limit: pageSize*1 })//商品信息
+                try {
+
+                        const offset = (pageNum - 1) * pageSize
+                        const { count, rows } = await Goods.findAndCountAll(
+                                {
+
+                                        offset: offset,
+                                        limit: pageSize * 1,
+                                        where: {
+
+                                                goods_name:{
+                                               
+                                                        // [Op.like]: `%${goods_name}`,
+                                                        // [Op.like]: `${goods_name}`, 
+                                                        [Op.like]: `%${goods_name}%`,
+                                                }
+                                        
+                                        
+                                        }//直接把条件goods_fm 放在这里
+                                }
+                        )
+                        return {
+                                pageNum,
+                                pageSize,
+                                total: count,
+                                list: rows
+                        }
+
+
+                } catch (error) {
+
+                }
+
+        }
+
 
 
 }

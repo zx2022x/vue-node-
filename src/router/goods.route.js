@@ -12,7 +12,8 @@ const {upload,
     restore,
     findAll,
     rufindAll,
-    findFenAll} =require('../controller/goods.controller')
+    findFenAll,
+    SearchItem} =require('../controller/goods.controller')
 // const{validator}=require("sequelize/types/utils/validator-extras")
 
 const router=new Router({prefix:'/goods'})
@@ -36,7 +37,8 @@ router.post('/:id/on',auth,hadAdminPermission,restore)
 router.get('/',findAll)
 //获取分类过后的商品列表
 router.get('/item',findFenAll)
-
+//搜索商品
+router.get('/search',SearchItem)
 
 
 //获取软删除商品列表(已下架)
