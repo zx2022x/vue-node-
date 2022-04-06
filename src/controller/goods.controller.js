@@ -220,7 +220,7 @@ class GoodsController {
 
             code: 0,
             message: '获取商品列表',
-            result: res,//把它写成字符串了，导致读不出数据
+            result: res,//把它写成字符串了，导致读不出数据q
 
         }
 
