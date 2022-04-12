@@ -47,7 +47,7 @@ class UserController {
                 message: '用户登录成功',
                 result: {
                     //生成token,expiresIn为过期时间 1d
-
+                    id:res.id,//返回id 方便修改数据
                     token: jwt.sign(res, JWT_SECRET, { expiresIn: '1d' }),
                 }
 
