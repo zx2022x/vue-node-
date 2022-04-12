@@ -61,7 +61,7 @@ class UserController {
 
     }
     //用户自己更改密码
-    async changePassword(ctx, next) {
+    async changePassword1(ctx, next) {
         //1获取数据库
         const id = ctx.state.user.id
         const password = ctx.request.body.password
