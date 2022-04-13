@@ -30,6 +30,7 @@ class UserService{
     async updateById({id,user_name,password,is_admin}){
        const whereOpt={id}
        const newUser={}
+       console.log('userbb'+user_name)
        password && Object.assign(newUser,{password})
        is_admin && Object.assign(newUser,{is_admin})
        user_name && Object.assign(newUser,{user_name})

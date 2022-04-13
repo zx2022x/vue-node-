@@ -27,6 +27,8 @@ router.post('/register',userValidator,verifyUser,cryptPassword,register)
 router.post('/login',userValidator,verifyLogin,login)
 //用户自己修改密码 patch请求允许只改一个参数
 router.patch('/',auth,cryptPassword,changePassword1)
+// //用户自己修改名称 patch请求允许只改一个参数
+// router.patch('/username',auth,changePassword1)
 //管理员修改用户密码
 router.patch('/adpa',cryptPassword,changePassword)
 //获取用户列表
