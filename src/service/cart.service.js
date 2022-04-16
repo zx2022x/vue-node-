@@ -4,7 +4,7 @@ const Goods = require('../model/goods.model')
 
 class CartService {
     //加入购物车
-    async createOrUpdate(user_id, goods_id) {
+    async createOrUpdate(user_id, goods_id,number) {
         console.log('开始了')
         try {
             let res = await Cart.findOne({
@@ -19,7 +19,7 @@ class CartService {
 
             if (res) {
                 //已经存在一条记录,将number+1
-                await res.increment('number')
+                await res.increment({number})
                 return await res.reload()
 
             } else {
@@ -79,7 +79,7 @@ class CartService {
     //         list: rows
     //     }
     // }
-    async findCarts(pageNum, pageSize) {
+    async findCarts(pageNum, pageSize,user_id) {
         try {
 
             const offset = (pageNum - 1) * pageSize
@@ -87,6 +87,7 @@ class CartService {
                 attributes: ['id', 'number', 'selected'],
                 offset: offset,
                 limit: pageSize * 1,
+                where:{user_id},
                 include: {
                     model: Goods,
                     as: 'goods_info',

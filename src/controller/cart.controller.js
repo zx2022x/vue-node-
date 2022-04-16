@@ -43,9 +43,11 @@ class CartController {
   async findAll(ctx) {
     try {
 
-      const { pageNum = 1, pageSize = 10 } = ctx.request.query//这里我写错了一个字母
+      const { pageNum = 1, pageSize = 10, user_id } = ctx.request.query//这里我写错了一个字母
+      // const user_id=ctx.request.body.user_id
 
-      const res = await findCarts(pageNum, pageSize)
+      // console.log("用户id "+user_id)
+      const res = await findCarts(pageNum, pageSize,user_id)
       ctx.body = {
         code: 0,
         message: '获取商品列表成功',
