@@ -14,9 +14,10 @@ class CartController {
 
       const user_id = ctx.state.user.id
       const goods_id = ctx.request.body.goods_id
-      console.log('购物车')
+      const number = ctx.request.body.number
+      // console.log('购物车')
       //操作数据库
-      const res = await createOrUpdate(user_id, goods_id)
+      const res = await createOrUpdate(user_id, goods_id,number)
       //
       ctx.body = {
         code: 0,

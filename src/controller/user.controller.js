@@ -65,7 +65,8 @@ class UserController {
         //1获取数据库
         const id = ctx.state.user.id
         const password = ctx.request.body.password
-        const user_name=ctx.request.body.user_name
+        // const user_name=ctx.request.body.user_name
+        const user_name=ctx.state.user.user_name
         console.log('user_name'+user_name)
         if (await updateById({ id, password,user_name })) {
             ctx.body = {
