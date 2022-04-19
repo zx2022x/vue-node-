@@ -12,10 +12,25 @@ const Order = seq.define('orders', {
     //     allowNull: false,
     //     comment: '地址id',
     // },
-    goods_info: {
-        type: DataTypes.TEXT,
+    goods_name: {
+        type: DataTypes.STRING,
         allowNull: false,
-        comment: '商品信息',
+        comment: '商品名称',
+
+
+    },
+   
+    goods_num: {
+        type: DataTypes.INTEGER,//INTEGER容量大
+        allowNull: false,
+        comment: '商品的库存',
+
+
+    },
+    goods_img: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        comment: '商品图片的url',
     },
     total: {
         type: DataTypes.DECIMAL(10, 2),//限制

@@ -3,7 +3,7 @@ const Address=require('../model/addr.model')
 class OrderService {
   //创建订单
   async createOrder(order) {
-    return await Order.create(order)
+    return await Order.bulkCreate(order)
   }
   //订单列表
   async findAllOrder(pageNum, pageSize, status) {
@@ -15,7 +15,7 @@ class OrderService {
       Address.belongsTo(Order);
       const { count, rows } = await Order.findAndCountAll({
         
-        attributes:['user_id','goods_info','total','order_number','status'],
+        attributes:['user_id','goods_name','goods_num','goods_img','total','order_number','status'],
       
         where: {
           status
