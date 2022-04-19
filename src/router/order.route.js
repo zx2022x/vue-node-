@@ -8,13 +8,13 @@ const {create,findAll,update,}=require('../controller/order.controller')
 router.post(
     '/',
     auth,
-    validator({
+    // validator({
         
        
-        goods_info: 'string',
-        total: 'string',
+    //     goods_info: 'string',
+    //     total: 'string',
 
-    }),
+    // }),
     create)
 
 //获取订单列表 

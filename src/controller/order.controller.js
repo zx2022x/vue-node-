@@ -8,16 +8,17 @@ class OrderController {
         console.log("订单开始")
         try {
 
-            const user_id = ctx.state.user.id
-            const { goods_info, total } = ctx.request.body
-            const order_number = 'PJ' + Date.now()//唯一
-            const res = await createOrder({
-                user_id,
+            // const user_id = ctx.state.user.id
+            const {list} = ctx.request.body
+            // const order_number = 'PJ' + Date.now()//唯一
+            // const res = await createOrder({
+            //     user_id,
                 
-                goods_info,
-                total,
-                order_number
-            })
+            //     goods_info,
+            //     total,
+            //     order_number
+            // })
+            const res = await createOrder(list)
             ctx.body = {
                 code: 0,
                 message: '生成订单成功',
@@ -64,6 +65,7 @@ class OrderController {
     //更新订单
     async update(ctx){
         const id=ctx.request.params.id
+        
         const {status}=ctx.request.body
         const res=await updateOrder(id,status)
         ctx.body={

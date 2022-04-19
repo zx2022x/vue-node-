@@ -3,7 +3,7 @@ const Address=require('../model/addr.model')
 class OrderService {
   //创建订单
   async createOrder(order) {
-    return await Order.create(order)
+    return await Order.bulkCreate(order)
   }
   //订单列表
   async findAllOrder(pageNum, pageSize, status) {
@@ -18,6 +18,7 @@ class OrderService {
         },
         offset: (pageNum - 1) * pageSize,
         limit: pageSize * 1,//limit限制页面列表数量
+
         include: {
           model: Address,
           

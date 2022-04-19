@@ -8,6 +8,7 @@ const Address = seq.define('addresses', {
         comment: '用户id',
     },
     consignee: {
+        
         type: DataTypes.STRING,
         allowNull: false,
         comment: '收货人姓名',
