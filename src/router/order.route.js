@@ -9,8 +9,8 @@ router.post(
     '/',
     auth,
     validator({
-
-        address_id: 'int',
+        
+       
         goods_info: 'string',
         total: 'string',
 

@@ -9,11 +9,11 @@ class OrderController {
         try {
 
             const user_id = ctx.state.user.id
-            const { address_id, goods_info, total } = ctx.request.body
+            const { goods_info, total } = ctx.request.body
             const order_number = 'PJ' + Date.now()//唯一
             const res = await createOrder({
                 user_id,
-                address_id,
+                
                 goods_info,
                 total,
                 order_number
