@@ -3,12 +3,16 @@ const Address=require('../model/addr.model')
 class OrderService {
   //创建订单
   async createOrder(order) {
-    return await Order.bulkCreate(order)
+    return await Order.create(order)
   }
   //订单列表
   async findAllOrder(pageNum, pageSize, status) {
     try {
-     
+      Order.hasOne(Address,{
+        foreignKey: "user_id",
+        sourceKey: "user_id"
+      });
+      Address.belongsTo(Order);
       const { count, rows } = await Order.findAndCountAll({
         
         attributes:['user_id','goods_info','total','order_number','status'],
@@ -18,10 +22,8 @@ class OrderService {
         },
         offset: (pageNum - 1) * pageSize,
         limit: pageSize * 1,//limit限制页面列表数量
-
         include: {
           model: Address,
-          
           attributes: ['consignee', 'phone', 'address'],
           where:{is_default:1}
       },
