@@ -35,8 +35,8 @@ class OrderController {
     async findAll(ctx) {
         try {
             // Order.belongsTo(Address)
-            const { pageNum = 1, pageSize = 10, status = 0 } = ctx.request.query
-            const res = await findAllOrder(pageNum, pageSize, status)
+            const { pageNum = 1, pageSize = 10, status = 0, user_id } = ctx.request.query
+            const res = await findAllOrder(pageNum, pageSize, status, user_id)
 
             ctx.body = {
                 code: 0,

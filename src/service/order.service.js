@@ -6,7 +6,7 @@ class OrderService {
     return await Order.bulkCreate(order)
   }
   //订单列表
-  async findAllOrder(pageNum, pageSize, status) {
+  async findAllOrder(pageNum, pageSize, status, user_id) {
     try {
       Order.hasOne(Address,{
         foreignKey: "user_id",
@@ -15,10 +15,12 @@ class OrderService {
       Address.belongsTo(Order);
       const { count, rows } = await Order.findAndCountAll({
         
-        attributes:['user_id','goods_name','goods_num','goods_img','total','order_number','status'],
+        attributes:['user_id','goods_name','goods_num','goods_img','total','order_number','status','createdAt','updatedAt'],
       
         where: {
-          status
+          status,
+          user_id
+
         },
         offset: (pageNum - 1) * pageSize,
         limit: pageSize * 1,//limit限制页面列表数量
