@@ -1,5 +1,5 @@
 const { userDoesNotExist } = require('../constant/err.type')
-const { createOrder, findAllOrder, updateOrder } = require('../service/order.service')
+const { createOrder, findAllOrder, updateOrder,ADfindAllOrder } = require('../service/order.service')
 class OrderController {
     //提交订单
     async create(ctx) {
@@ -37,6 +37,27 @@ class OrderController {
             // Order.belongsTo(Address)
             const { pageNum = 1, pageSize = 10, status = 0, user_id } = ctx.request.query
             const res = await findAllOrder(pageNum, pageSize, status, user_id)
+
+            ctx.body = {
+                code: 0,
+                message: '获取订单列表成功',
+                result: res,
+
+            }
+
+        } catch (error) {
+            console.log('订单错误' + error)
+        }
+
+
+    }
+
+     //管理员获取订单列表
+     async findAllOrderAD(ctx) {
+        try {
+            // Order.belongsTo(Address)
+            const { pageNum = 1, pageSize = 10, status = 0} = ctx.request.query
+            const res = await ADfindAllOrder(pageNum, pageSize, status)
 
             ctx.body = {
                 code: 0,
