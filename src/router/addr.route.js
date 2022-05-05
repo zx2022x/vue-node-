@@ -36,7 +36,7 @@ router.delete('/:id',auth,remove)
 router.patch('/:id',auth,setDefault)
 
 router.get("/with_order", async ctx => {
-    console.log(666);
+    // console.log(666);
     try {
         Address.hasMany(Order, {
             sourceKey: 'id',

@@ -63,7 +63,7 @@ class GoodsController {
 
 
     }
-    //更新商品
+    //编辑商品
     async update(ctx) {
         try {
 

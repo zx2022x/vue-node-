@@ -1,4 +1,5 @@
 const {goodsFormatError}=require('../constant/err.type')
+//验证参数
 const validator=async (ctx,next)=>{
    try {
        ctx.verifyParams({
