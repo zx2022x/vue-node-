@@ -18,7 +18,7 @@ class CartService {
 
 
             if (res) {
-                //已经存在一条记录,将number+1
+                //已经存在一条记录,将number
                 await res.increment({number})
                 return await res.reload()
 

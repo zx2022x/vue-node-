@@ -17,7 +17,7 @@ class GoodsService {
         }
         //直接删除商品,destroy返回0 ,1
         async removeGoods(id) {
-                const res = await Goods.destroy({ where: { id } })
+                const res = await Goods.destroy({ where: { id } , force: true})
                 return res > 0 ? true : false
         }
         //下架商品

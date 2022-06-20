@@ -92,6 +92,7 @@ class GoodsController {
     async remove(ctx) {
         await removeGoods(ctx.params.id)
         ctx.body = {
+            
             code: 0,
             message: '删除成功',
             result: '',
